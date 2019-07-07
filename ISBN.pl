@@ -10,10 +10,10 @@ start :-
 
 
 %----------------------------------
-% "isbn(X)" ist ein einstelliges Prädikat, welches eine 10 stellige ISBN auf ihre Gültigkeit prüft,
-% indem sie die Laengenrestriktion prüft.
+% "isbn(X)" ist ein einstelliges Pr√§dikat, welches eine 10 stellige ISBN auf ihre G√ºltigkeit pr√ºft,
+% indem sie die Laengenrestriktion pr√ºft.
 %
-% "phrase(Eingabe,Liste)" ist ein zweistelliges Prädikat, welches auf die DCG Regeln zugreift
+% "phrase(Eingabe,Liste)" ist ein zweistelliges Pr√§dikat, welches auf die DCG Regeln zugreift
 % und die Eingabe in die festgelgte Listenform generiert bzw. mit der festgelgten 
 % Listenform abgleicht.
 %----------------------------------
@@ -21,13 +21,13 @@ start :-
 isbn(X) :- phrase(isbn,X), laenge(X,13), !.
 
 %----------------------------------
-% "laenge(Liste,Laenge)" ist ein zweistelliges Prädikat, welches die Länge einer Liste ermittelt.
+% "laenge(Liste,Laenge)" ist ein zweistelliges Pr≈†dikat, welches die L√§nge einer Liste ermittelt.
 %----------------------------------
 
-laenge([],0).							% trivialer Fall: Die Länge einer leeren Liste ist 0.
+laenge([],0).							% trivialer Fall: Die L√§nge einer leeren Liste ist 0.
 laenge([_Kopf|Rest],Laenge) :-				
-	laenge(Rest,Laenge1),				% rekursiver Fall: zählt so lange bis die Liste leer ist
-  	Laenge is Laenge1+1.				% Jeder Buchstabe hat die Länge 1, diese werden miteinander
+	laenge(Rest,Laenge1),				% rekursiver Fall: z√§hlt so lange bis die Liste leer ist
+  	Laenge is Laenge1+1.				% Jeder Buchstabe hat die L√§nge 1, diese werden miteinander
   										% addiert.
   			
 %----------------------------------  										
@@ -107,7 +107,7 @@ titelsnummer --> [Zahl1,Zahl2,Zahl3,Zahl4,Zahl5,Zahl6,Zahl7],
 	{zahl(Zahl1), zahl(Zahl2), zahl(Zahl3), zahl(Zahl4), zahl(Zahl5), zahl(Zahl6), zahl(Zahl7)}. 
 	
 %----------------------------------
-% Prüfziffer: 1 stellig
+% Pr≈∏fziffer: 1 stellig
 %----------------------------------
 
 pruefziffer --> [Zahl], {zahl(Zahl)}.
@@ -134,21 +134,21 @@ zahl('8').
 zahl('9').
 
 %----------------------------------	
-% "isbn_ok(ISBN)" ist ein einstelliges Prädikat, welches eine 10 stellige ISBN auf seine Richtigkeit prüft,
-% dem es die Prüfziffer berechnet und kontrolliert.
+% "isbn_ok(ISBN)" ist ein einstelliges Pr√§dikat, welches eine 10 stellige ISBN auf seine Richtigkeit pr√ºft,
+% dem es die Pr√ºfziffer berechnet und kontrolliert.
 %----------------------------------
-% "atom_chars(Wort,Liste)" ist ein zweistelliges Prädikat, welches die Eingabe in eine Liste verwandelt.
-% "atom_number(AtomNummer,Nummer)" ist ein zweistelliges Prädikat, welches Nummern der Form '1' zu 1 umwandelt.
-% "mod(Summe,Zahl)" ist ein zweistelliges Prädikat für die Modulo-Division.
+% "atom_chars(Wort,Liste)" ist ein zweistelliges Pr√§dikat, welches die Eingabe in eine Liste verwandelt.
+% "atom_number(AtomNummer,Nummer)" ist ein zweistelliges Pr≈†dikat, welches Nummern der Form '1' zu 1 umwandelt.
+% "mod(Summe,Zahl)" ist ein zweistelliges Pr≈†dikat f√ºr die Modulo-Division.
 %----------------------------------
 
 isbn_ok(Eingabe) :-
 	
 	atom_chars(Eingabe,A), 				% Die Eingabe wird in eine Liste umgewandelt.					
-	isbn(A),							% Diese Liste wird durch das Prädikat isbn/1 auf Längenrestriktion
-										% geprüft.
+	isbn(A),						% Diese Liste wird durch das Pr√§dikat isbn/1 auf L√∂ngenrestriktion
+								% gepr√ºft.
 	delete(A,-,B),  					% Ist dies positiv verlaufen, dann werden die Bindestriche aus der
-										% Liste gelöscht (eingebautes Prädikat). Es entstehz eine neue Liste.
+								% Liste gel√∂scht (eingebautes Pr√§dikat). Es entstehz eine neue Liste.
 	B = [Element1,						% Jedes Element bekommt eine Variable zugeteilt.
 	Element2,
 	Element3,
@@ -180,4 +180,4 @@ isbn_ok(Eingabe) :-
 	Zahl8 is Code7 * 8,
 	Zahl9 is Code8 * 9,
 	Summe is Code + Zahl2 + Zahl3 + Zahl4 + Zahl5 + Zahl6 + Zahl7 + Zahl8 + Zahl9,
-	Pruefziffer is mod(Summe,11), !.	% Die Prüfziffer wird mit dem Modalwert verglichen.
+	Pruefziffer is mod(Summe,11), !.	% Die Pr√ºfziffer wird mit dem Modalwert verglichen.
